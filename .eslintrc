@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["eslint-config-postcss"],
+  "globals": {
+    "test": true
+  },
+  "rules": {
+    "comma-dangle": 0
+  }
+}

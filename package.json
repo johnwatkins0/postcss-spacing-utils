@@ -1,0 +1,32 @@
+{
+    "name": "postcss-spacing-utils",
+    "version": "0.1.0",
+    "description": "Generates spacing utility classes from user settings.",
+    "main": "dist/index.js",
+    "author": "John Watkins",
+    "license": "MIT",
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/johnwatkins0/postcss-spacing-utils"
+    },
+    "scripts": {
+        "develop": "babel --watch src --out-dir dist",
+        "build": "babel src --out-dir dist",
+        "prepare": "BABEL_ENV=publish babel src --out-dir dist",
+        "pretest": "eslint *.js"
+    },
+    "devDependencies": {
+        "babel": "^6.5.2",
+        "babel-cli": "^6.18.0",
+        "babel-core": "^6.21.0",
+        "babel-eslint": "^8.1.2",
+        "babel-preset-env": "^1.6.1",
+        "eslint": "^4.14.0",
+        "eslint-config-postcss": "^2.0.2"
+    },
+    "dependencies": {
+        "cssbeautify": "^0.3.1",
+        "postcss": "^6.0.14"
+    }
+}
