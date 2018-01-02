@@ -5,6 +5,7 @@ import optsDefaults from '../optsDefaults';
 import { makeSpecialClasses } from './makeSpecialClasses';
 import { makeSidesClasses } from './makeSidesClasses';
 import { makeAllSidesClasses } from './makeAllSidesClasses';
+import { makeAxisClasses } from './makeAxisClasses';
 
 const makeRules = (opts = {}) =>
     new Promise(resolve => {
@@ -12,8 +13,10 @@ const makeRules = (opts = {}) =>
 ${makeSpecialClasses()}
 ${makeAllSidesClasses(opts, 'margin')}
 ${makeSidesClasses(opts, 'margin')}
+${makeAxisClasses(opts, 'margin')}
 ${makeAllSidesClasses(opts, 'padding')}
 ${makeSidesClasses(opts, 'padding')}
+${makeAxisClasses(opts, 'padding')}
 `;
 
         resolve(
