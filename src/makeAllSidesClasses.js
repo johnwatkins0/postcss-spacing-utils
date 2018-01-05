@@ -3,7 +3,7 @@ export const makeAllSidesClasses = (opts, spacerType) =>
         .map(
             (size, i) =>
                 `.${spacerType.slice(0, 1)}-${i} {
-	${spacerType}: ${size};
+	${spacerType}: ${size} !important;
 }
 `
         )

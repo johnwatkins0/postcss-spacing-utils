@@ -1,6 +1,6 @@
 {
     "name": "postcss-spacing-utils",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Generates spacing utility classes from user settings.",
     "main": "dist/index.js",
     "author": "John Watkins",
