@@ -3,7 +3,8 @@ export const makeAxisClasses = (opts, spacerType) =>
         .map(
             (size, i) =>
                 `.${spacerType.slice(0, 1)}x-${i} {
-	${spacerType}: 0 ${size};
+	${spacerType}-right: ${size} !important;
+	${spacerType}-left: ${size} !important;
 }
 `
         )
@@ -12,7 +13,8 @@ export const makeAxisClasses = (opts, spacerType) =>
         .map(
             (size, i) =>
                 `.${spacerType.slice(0, 1)}y-${i} {
-			${spacerType}: ${size} 0;
+			${spacerType}-top: ${size} !important;
+			${spacerType}-bottom: ${size} !important;
 		}
 		`
         )

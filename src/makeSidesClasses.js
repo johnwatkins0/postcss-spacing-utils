@@ -7,7 +7,7 @@ export const makeSidesClasses = (opts, spacerType) =>
                 .map(
                     (size, i) =>
                         `.${spacerType.slice(0, 1)}${abbreviation}-${i} {
-	${spacerType}-${dimensions[abbreviation]}: ${size};
+	${spacerType}-${dimensions[abbreviation]}: ${size} !important;
 }
 `
                 )
