@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "title": "postcss-spacing-utils schema",
+  "description": "Options passed to the postcss-spacing-utils plugin.",
+  "required": ["spacers"],
+  "properties": {
+    "spacers": {
+      "description": "An array of CSS values to build spacers from.",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
