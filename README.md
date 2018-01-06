@@ -5,7 +5,7 @@ Generates spacing utility classes from user settings.
 ## Install
 
 ```
-npm install --dev postcss-spacing-utils
+npm install --save-dev postcss-spacing-utils
 ```
 
 OR
