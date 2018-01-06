@@ -1,16 +1,16 @@
 import postcss from 'postcss';
-import cssbeautify from 'cssbeautify';
+import stylelint from 'stylelint';
 
 import optsDefaults from '../optsDefaults';
-import { makeSpecialClasses } from './makeSpecialClasses';
+import { specialClasses } from './specialClasses';
 import { makeSidesClasses } from './makeSidesClasses';
 import { makeAllSidesClasses } from './makeAllSidesClasses';
 import { makeAxisClasses } from './makeAxisClasses';
+import { validateOpts } from './validateOpts';
 
-const makeRules = (opts = {}) =>
-    new Promise(resolve => {
-        const css = `
-${makeSpecialClasses()}
+const makeRules = opts =>
+    new Promise(async resolve => {
+        const code = `${specialClasses}
 ${makeAllSidesClasses(opts, 'margin')}
 ${makeSidesClasses(opts, 'margin')}
 ${makeAxisClasses(opts, 'margin')}
@@ -19,25 +19,22 @@ ${makeSidesClasses(opts, 'padding')}
 ${makeAxisClasses(opts, 'padding')}
 `;
 
-        resolve(
-            cssbeautify(css, {
-                indent: '  ',
-                autosemicolon: true
-            })
-        );
+        const lintResult = await stylelint.lint({ code, fix: true });
+        resolve(lintResult.output);
     });
 
-const spacingUtils = (opts = optsDefaults) => (root, result) =>
+export const spacingUtils = (opts = optsDefaults) => (root, result) =>
     new Promise((resolve, reject) => {
         if (root.source.input.css.indexOf('@spacing-utils') === -1) {
             result.warn('@spacing-utils at rule not found');
-            resolve();
+            reject('@spacing-utils at rule not found');
             return;
         }
 
         root.walkAtRules('spacing-utils', async rule => {
             try {
-                const css = await makeRules(opts);
+                const validatedOpts = await validateOpts(opts);
+                const css = await makeRules(validatedOpts);
                 rule.before(css);
                 rule.remove();
                 resolve();
@@ -47,4 +44,6 @@ const spacingUtils = (opts = optsDefaults) => (root, result) =>
         });
     });
 
-module.exports = postcss.plugin('spacing-utils', spacingUtils);
+const plugin = postcss.plugin('spacing-utils', spacingUtils);
+
+export default plugin;

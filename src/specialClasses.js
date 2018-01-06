@@ -1,4 +1,4 @@
-export const makeSpecialClasses = () => `
+export const specialClasses = `
 .m-auto {
   margin: auto !important;
 }
