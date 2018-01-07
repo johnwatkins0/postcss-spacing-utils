@@ -38,6 +38,4 @@ export const spacingUtils = (opts = optsDefaults) => (root, result) =>
         });
     });
 
-const plugin = postcss.plugin("spacing-utils", spacingUtils);
-
-export default plugin;
+module.exports = postcss.plugin("spacing-utils", spacingUtils);
