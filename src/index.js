@@ -25,6 +25,14 @@ ${makeAxisClasses(opts, "padding")}
 
 export const spacingUtils = (opts = optsDefaults) => (root, result) =>
     new Promise((resolve, reject) => {
+        const atRuleCount = root.toString().split("@spacing-utils").length - 1;
+
+        if (atRuleCount === 0) {
+            resolve();
+            return;
+        }
+
+        let steps = 0;
         root.walkAtRules("spacing-utils", async rule => {
             try {
                 const validatedOpts = await validateOpts(opts);
@@ -33,9 +41,17 @@ export const spacingUtils = (opts = optsDefaults) => (root, result) =>
                 rule.remove();
                 resolve();
             } catch (error) {
-                reject(error);
+                steps += 1;
+                result.warn(err);
             }
         });
+
+        const completionInterval = setInterval(() => {
+            if (steps === atRuleCount) {
+                clearInterval(completionInterval);
+                resolve();
+            }
+        }, 1000);
     });
 
 module.exports = postcss.plugin("spacing-utils", spacingUtils);
